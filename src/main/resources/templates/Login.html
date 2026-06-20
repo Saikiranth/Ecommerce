@@ -5,84 +5,109 @@
 <title>Insert title here</title>
 <style type="text/css">body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #312e81);
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Container */
 .login-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
+/* Card */
 .login-form {
-    background: white;
+    background: rgba(255, 255, 255, 0.95);
     padding: 40px;
-    width: 320px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 340px;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 14px;
     transition: 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .login-form:hover {
-    transform: scale(1.03);
+    transform: translateY(-6px);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.45);
 }
 
+/* Heading */
 .login-form h2 {
     margin: 0;
-    color: #333;
+    color: #0f172a;
+    font-size: 24px;
+    font-weight: 700;
 }
 
+/* Subtext */
 .login-form p {
     margin: 0;
-    color: gray;
+    color: #64748b;
     font-size: 14px;
 }
 
-.login-form input {
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+/* Inputs + Select */
+.login-form input,
+.login-form select {
+    padding: 12px 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
     outline: none;
+    font-size: 14px;
+    background: #f8fafc;
     transition: 0.3s;
 }
 
-.login-form input:focus {
-    border-color: #6c63ff;
-    box-shadow: 0 0 5px rgba(108,99,255,0.5);
+/* Focus effect */
+.login-form input:focus,
+.login-form select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    background: #fff;
 }
 
+/* Button */
 .login-form button {
     padding: 12px;
     border: none;
-    border-radius: 8px;
-    background: #6c63ff;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
     color: white;
     font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
+    margin-top: 5px;
 }
 
 .login-form button:hover {
-    background: #4f46e5;
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99,102,241,0.3);
 }
 
+/* Bottom text */
 .bottom-text {
-    font-size: 14px;
+    font-size: 13px;
+    color: #475569;
 }
 
 .bottom-text a {
-    color: #6c63ff;
+    color: #4f46e5;
+    font-weight: 600;
     text-decoration: none;
+}
+
+.bottom-text a:hover {
+    text-decoration: underline;
 }</style>
 </head>
 <body>
