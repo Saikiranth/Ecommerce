@@ -1,0 +1,542 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Dashboard</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        .header {
+            background: #4f46e5;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>Customer Dashboard</h2>
+</div>
+
+<div class="container">
+
+    <div class="card">🛍 Product Browsing & Search</div>
+    <div class="card">📄 Product Details View</div>
+    <div class="card">🛒 Add to Cart & Wishlist</div>
+    <div class="card">📦 Place Orders</div>
+    <div class="card">💳 Payment Gateway Integration</div>
+    <div class="card">🚚 Order Tracking</div>
+    <div class="card">👤 Profile Management</div>
+
+</div>
+
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+}
+
+/* Header */
+
+.header{
+    background:#4f46e5;
+    color:white;
+    padding:15px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    gap:20px;
+}
+
+.menu a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.search-box{
+    display:flex;
+}
+
+.search-box input{
+    padding:8px;
+    width:250px;
+    border:none;
+    border-radius:5px 0 0 5px;
+}
+
+.search-box button{
+    padding:8px 15px;
+    border:none;
+    background:#111827;
+    color:white;
+    border-radius:0 5px 5px 0;
+    cursor:pointer;
+}
+
+/* Slider */
+
+.slider{
+    width:100%;
+    height:350px;
+    overflow:hidden;
+}
+
+.slider img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+/* Products */
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    align-items: stretch;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    /* FIX SIZE ISSUE */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 10px;
+}
+.card h3{
+    margin:10px 0;
+}
+
+.price{
+    color:green;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.btn{
+    margin-top:10px;
+    padding:10px 15px;
+    border:none;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.cart{
+    background:#f59e0b;
+    color:white;
+}
+
+.buy{
+    background:#10b981;
+    color:white;
+}
+
+</style>
+</head>
+<body>
+
+
+<!-- Header -->
+
+<div class="header">
+
+    <div class="logo">MyShop</div>
+
+   <div class="menu">
+    
+
+    <a href="/cart">🛒 Cart</a>   <!-- FIXED -->
+
+    <a href="/orders">📦 Orders</a>
+   
+    <a href="/orders">🚚 Tracking</a>
+  <a href="#" onclick="document.getElementById('profileModal').style.display='flex'">👤 Profile</a>
+</div>
+
+    <form class="search-box" th:action="@{/customer/home}" method="get">
+    <input type="text" name="search" placeholder="Search Product"
+           th:value="${search}">
+    <button type="submit">Search</button>
+</form>
+    
+    <div style="display:flex;justify-content:space-between;
+            align-items:center;
+            padding:10px 20px;
+           color:white;">
+
+   
+
+    <a href="/logout"
+       style="color:white;text-decoration:none;
+              background:red;padding:8px 15px;
+              border-radius:6px;">
+        Logout
+    </a>
+
+</div>
+
+</div>
+
+<!-- Slider -->
+
+<div class="slider">
+    <img id="slide"
+    src="<!-- https://images.unsplash.com/photo-1523275335684-37898b6baf30 -->">
+</div>
+
+<!-- Products -->
+
+
+
+<!-- 
+    <div class="card">
+        <img src="images/nikeShoes.jpg">
+        <h3>Nike Shoes</h3>
+        <div class="price">₹2999</div>
+
+        <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Nike Shoes">
+    <button class="btn cart">Add Cart</button>
+    <button class="btn buy">
+            Buy Now
+        </button>
+</form>
+
+        
+    </div>
+    
+   
+    
+iPhone
+    <div class="card">
+        <img src="images/iphone.jpg">
+        <h3>iPhone</h3>
+        <div class="price">₹69999</div>
+
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="iPhone">
+    <button class="btn cart">Add Cart</button>
+    
+    <button class="btn buy">
+            Buy Now
+        </button>
+</form>
+
+        
+    </div>
+
+Headphones
+
+    <div class="card">
+        <img src="images/Headphones.jpg">
+        <h3>Headphones</h3>
+        <div class="price">₹1999</div>
+
+       
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Headphones">
+    <button class="btn cart">Add Cart</button>
+    
+    <button class="btn buy">
+            Buy Now
+        </button>
+</form>
+
+        
+    </div>
+
+
+
+Bat
+
+ <div class="card">
+        <img src="images/Bat.jpg">
+        <h3>Bat</h3>
+        <div class="price">₹1599</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Bat">
+    <button class="btn cart">Add Cart</button>
+    <button class="btn buy">
+            Buy Now
+        </button>
+</form>
+
+       
+    </div> -->
+
+
+
+<!-- 
+Laptop
+
+<div class="card">
+        <img src="images/laptop.png">
+        <h3>Laptop</h3>
+        <div class="price">₹52000</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="laptop">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div>
+
+
+
+
+T-Shirt
+
+<div class="card">
+        <img src="images/Tshirt.png">
+        <h3>T-Shirt</h3>
+        <div class="price">₹599</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="T-Shirt">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div>
+
+
+
+Vivo
+<div class="card">
+        <img src="images/Vivo.jpg">
+        <h3>Vivo</h3>
+        <div class="price">₹13000</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Vivo">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div>
+
+
+
+Watch
+<div class="card">
+        <img src="images/Watch.jpg">
+        <h3>Watch</h3>
+        <div class="price">₹1999</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Watch">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div>
+    
+   Buds
+<div class="card">
+        <img src="images/EarBuds.jpg">
+        <h3>Buds</h3>
+        <div class="price">₹1199</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Buds">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div>
+    
+    
+    Iphone-Charger
+<div class="card">
+        <img src="images/iphonecharger.jpg">
+        <h3>Iphone-Charger</h3>
+        <div class="price">₹3999</div>
+
+        
+        
+      <form action="/addCart" method="post">
+    <input type="hidden" name="product" value="Iphone-Charger">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+        <button class="btn buy">
+            Buy Now
+        </button>
+    </div> -->
+    
+    <div class="products">
+
+    <div class="card" th:each="p : ${products}">
+
+        <img th:src="${p.imageUrl}">
+
+        <h3 th:text="${p.name}"></h3>
+
+        <div class="price">
+            ₹ <span th:text="${p.price}"></span>
+        </div>
+
+        <p th:text="${p.description}"></p>
+
+        <!-- ✅ ADD THIS FORM HERE -->
+       <form th:action="@{/addCart}" method="post">
+    <input type="hidden" name="productId" th:value="${p.id}">
+    <button class="btn cart">Add Cart</button>
+</form>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+<!-- <form action="/cart/add" method="post">
+    <input type="hidden" name="productId" value="1">
+    <button type="submit" class="btn cart">
+        Add Cart
+    </button>
+</form> -->
+
+<script>
+
+let images=[
+"/images/WatchScroll.jpg",
+"/images/productsscroll.jpg",
+"/images/Shirtsscroll.jpg"
+];
+
+let index=0;
+
+setInterval(()=>{
+    index=(index+1)%images.length;
+    document.getElementById("slide").src=images[index];
+},3000);
+
+</script>
+<!-- PROFILE MODAL -->
+<div id="profileModal" style="display:none; position:fixed; top:0; left:0;
+     width:100%; height:100%; background:rgba(0,0,0,0.5);
+     justify-content:center; align-items:center; z-index:999;">
+
+    <div style="background:white; padding:30px; border-radius:12px;
+                width:350px; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+
+        <h2 style="margin-bottom:20px; color:#4f46e5;">👤 My Profile</h2>
+
+        <p style="margin:10px 0;"><b>Name:</b>
+            <span th:text="${user != null} ? ${user.name} : 'N/A'"></span>
+        </p>
+        <p style="margin:10px 0;"><b>Email:</b>
+            <span th:text="${user != null} ? ${user.email} : 'N/A'"></span>
+        </p>
+        <p style="margin:10px 0;"><b>Role:</b>
+            <span th:text="${user != null} ? ${user.role} : 'N/A'"></span>
+        </p>
+
+        <button onclick="document.getElementById('profileModal').style.display='none'"
+                style="margin-top:20px; padding:10px 20px; background:#4f46e5;
+                       color:white; border:none; border-radius:6px; cursor:pointer;">
+            Close
+        </button>
+
+    </div>
+</div>
+</body>
+</html>

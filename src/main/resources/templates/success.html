@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Order Success</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+body {
+    background: linear-gradient(135deg, #f0f4ff, #e8f5e9);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.success-icon {
+    font-size: 80px;
+    animation: bounce 0.8s ease;
+}
+
+@keyframes bounce {
+    0%   { transform: scale(0); }
+    60%  { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+h1 {
+    margin: 15px 0 5px;
+    color: #1a1a2e;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #6b7280;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    padding: 35px 40px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.order-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.order-row:last-child {
+    border-bottom: none;
+}
+
+.order-row .label {
+    color: #6b7280;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.order-row .value {
+    font-weight: bold;
+    color: #1a1a2e;
+    font-size: 14px;
+    text-align: right;
+    max-width: 260px;
+}
+
+.status-badge {
+    background: #d1fae5;
+    color: #065f46;
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.total-row .value {
+    color: #4f46e5;
+    font-size: 20px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: #4f46e5;
+    color: white;
+}
+
+.btn-primary:hover { background: #4338ca; }
+
+.btn-secondary {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+.btn-secondary:hover { background: #e5e7eb; }
+</style>
+</head>
+<body>
+
+<div class="success-icon">🎉</div>
+<h1>Order Placed Successfully!</h1>
+<p class="subtitle">Thank you for shopping with us!</p>
+
+<div class="card" th:if="${order != null}">
+
+    <div class="order-row">
+        <span class="label">🧾 Order ID</span>
+        <span class="value" th:text="'#' + ${order.id}"></span>
+    </div>
+
+    <div class="order-row">
+        <span class="label">🔖 Status</span>
+        <span class="value">
+            <span class="status-badge" th:text="${order.status}"></span>
+        </span>
+    </div>
+
+    <div class="order-row">
+        <span class="label">🛍 Products</span>
+        <span class="value" th:text="${order.products}"></span>
+    </div>
+
+    <div class="order-row">
+        <span class="label">📅 Date</span>
+        <span class="value" th:text="${order.orderDate}"></span>
